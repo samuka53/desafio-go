@@ -1,0 +1,1 @@
+[Link para a imagem do Docker](https://hub.docker.com/r/samukavno/fullcycle)

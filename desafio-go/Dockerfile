@@ -1,8 +1,16 @@
-FROM golang:1.7.3 as build
-WORKDIR /src
-COPY app.go .
-RUN go build -o /app .
+FROM golang:1.17-alpine AS builder
 
-FROM scratch as bin
-COPY --from=build app /
-CMD ["/app"]
+WORKDIR /app
+
+COPY . . 
+
+RUN go build -o /main main.go
+
+FROM scratch
+
+WORKDIR /
+
+COPY --from=builder /main /main
+EXPOSE 8080
+
+CMD [ "/main" ]
